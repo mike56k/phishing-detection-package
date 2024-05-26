@@ -32,13 +32,14 @@ required commands from the command line. The file with description for tox can b
 in `tox.ini` file. The following commands can be run from the command line
 using tox:
 
-- Run training: first create a directory for saving models if there is no any `mkdir ./phishing_detection_model/trained_models` and then run `tox -e train`
-- Run testing (via [pytest](https://docs.pytest.org/en/6.2.x/)): `tox -e test_package`
-- Run typechecking (via [mypy](https://mypy.readthedocs.io/en/stable/)): `tox -e typechecks`
+- Install tox: `python -m pip install --user tox`
+- Run training: first create a directory for saving models if there is no any `mkdir ./phishing_detection_model/trained_models` and then run `python -m tox -e train`
+- Run testing (via [pytest](https://docs.pytest.org/en/6.2.x/)): `python -m tox -e test_package`
+- Run typechecking (via [mypy](https://mypy.readthedocs.io/en/stable/)): `python -m tox -e typechecks`
 - Run style checks
   (via [black](https://github.com/psf/black), [isort](https://github.com/PyCQA/isort),
   [mypy](https://mypy.readthedocs.io/en/stable/)
-  and [flake8](https://pypi.org/project/flake8/)): `tox -e stylechecks`
+  and [flake8](https://pypi.org/project/flake8/)): `python -m tox -e stylechecks`
 
 ## How to install the package
 
