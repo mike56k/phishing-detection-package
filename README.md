@@ -55,9 +55,7 @@ After that you can make predictions, using the package:
 from phishing_detection_model.predict import make_prediction
 
 # Example input
-input_dict = {'PassengerId': [0], 'Pclass': [1], 'Name': ['Snyder, Mrs. John Pillsbury (Nelle Stevenson)'],
-              'Sex': ['female'], 'Age': [23], 'SibSp': [1], 'Parch': [0], 'Ticket': [21228], 'Fare': [82.2667],
-              'Cabin': ['B45'], 'Embarked': ['S']}
+input_dict = {'URL': ['https://google.com']}
 
 result = make_prediction(input_data=input_dict)
 
