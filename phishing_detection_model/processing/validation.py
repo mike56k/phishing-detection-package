@@ -7,6 +7,7 @@ from pydantic import BaseModel, ValidationError
 
 from phishing_detection_model.config.core import config
 
+
 def drop_na_inputs(*, input_data: pd.DataFrame) -> pd.DataFrame:
     """Check model inputs for na values and filter."""
     validated_data = input_data.copy()
@@ -43,6 +44,7 @@ def validate_inputs(*, input_data: pd.DataFrame) -> Tuple[pd.DataFrame, Optional
 
 class PhishingDetectionInputSchema(BaseModel):
     URL: Optional[str]
+
 
 class MultiplePhishingDetectionInputs(BaseModel):
     inputs: List[PhishingDetectionInputSchema]
