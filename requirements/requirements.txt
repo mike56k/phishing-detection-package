@@ -2,7 +2,7 @@ joblib==1.4.2
 # We use compatible release functionality (see PEP 440 here: https://www.python.org/dev/peps/pep-0440/#compatible-release)
 # to specify acceptable version ranges of our project dependencies. This gives us the flexibility to keep up with small
 # updates/fixes, whilst ensuring we don't install a major update which could introduce backwards incompatible changes.
-numpy==1.26.4
+numpy==1.23.5
 pandas==2.2.2
 pydantic>=1.8.1,<1.9.0
 nltk==3.8.1
