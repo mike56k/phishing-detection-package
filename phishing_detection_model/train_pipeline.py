@@ -21,28 +21,16 @@ def run_training() -> None:
 
     # read training data
     data = load_dataset(file_name=config.app_config.training_data_file)
-    print(f"{data.head()}")
-    # data["Cabin"] = data["Cabin"].apply(get_first_cabin)
-    # data["Title"] = data["Name"].apply(get_title)
-
-    # cast numerical variables as floats
-    # data["Fare"] = data["Fare"].astype("float")
-    # data["Age"] = data["Age"].astype("float")
-
-    # data.drop(labels=config.model_config.variables_to_drop, axis=1, inplace=True)
 
     # divide train and test
     X_train, X_test, y_train, y_test = train_test_split(
-        data[config.model_config.features],  # predictors
+        data[config.model_config.features], # predictors
         data[config.model_config.target],
         test_size=config.model_config.test_size,
         # we are setting the random seed here
         # for reproducibility
         random_state=config.model_config.random_state,
     )
-
-    # print(f"{X_train.head()}")
-    # print(f"{X_test}")
 
     # fit model
     phishing_detection_pipe.fit(X_train, y_train)
