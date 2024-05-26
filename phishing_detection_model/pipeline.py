@@ -13,7 +13,7 @@ phishing_detection_pipe = Pipeline(
     [
         (
             "count_vectorizer",
-            CountVectorizer(tokenizer=RegexpTokenizer(r'[A-Za-z]+').tokenize, stop_words='english'),
+            CountVectorizer(tokenizer=RegexpTokenizer(r'[A-Za-z]+').tokenize, stop_words='english', token_pattern=None),
         ),
         (
             "logit",

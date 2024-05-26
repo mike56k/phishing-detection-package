@@ -7,4 +7,4 @@ isort==5.8.0
 mypy==0.812
 
 # testing requirements
-pytest>=6.2.3,<6.3.0
+pytest==8.2.1

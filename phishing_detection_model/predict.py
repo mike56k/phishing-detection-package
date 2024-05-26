@@ -8,7 +8,7 @@ from phishing_detection_model.processing.data_manager import load_pipeline
 from phishing_detection_model.processing.validation import validate_inputs
 
 pipeline_file_name = f"{config.app_config.pipeline_save_file}{_version}.pkl"
-_price_pipe = load_pipeline(file_name=pipeline_file_name)
+_pipe = load_pipeline(file_name=pipeline_file_name)
 
 
 def make_prediction(
@@ -22,8 +22,8 @@ def make_prediction(
 
     results: t.Dict[str, t.Any] = {"preds": None, "probs": None, "version": _version, "errors": errors}
 
-    preds = _price_pipe.predict(X=validated_data[config.model_config.features])
-    probs = _price_pipe.predict_proba(X=validated_data[config.model_config.features])[:, 1]
+    preds = _pipe.predict(X=validated_data[config.model_config.features[0]])
+    probs = _pipe.predict_proba(X=validated_data[config.model_config.features[0]])[:, 1]
 
     # Fill the results dict
     results["preds"] = [pred for pred in preds]

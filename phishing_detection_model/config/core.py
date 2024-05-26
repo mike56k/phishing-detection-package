@@ -33,7 +33,7 @@ class ModelConfig(BaseModel):
     """
 
     target: str
-    features: str
+    features: List[str]
     test_size: float
     random_state: int
     alpha: float
