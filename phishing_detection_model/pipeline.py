@@ -1,53 +1,25 @@
-# for encoding categorical variables
-from feature_engine.encoding import OneHotEncoder, RareLabelEncoder
+from nltk.tokenize import RegexpTokenizer # regexp tokenizers use to split words from text  
+from sklearn.feature_extraction.text import CountVectorizer # create sparse matrix of words using regexptokenizes  
 
-# for imputation
-from feature_engine.imputation import AddMissingIndicator, CategoricalImputer, MeanMedianImputer
 from sklearn.linear_model import LogisticRegression
 
 # pipeline
 from sklearn.pipeline import Pipeline
 
-# feature scaling
-from sklearn.preprocessing import StandardScaler
-
 from phishing_detection_model.config.core import config
-from phishing_detection_model.processing.features import ExtractLetterTransformer
 
 # set up the pipeline
 phishing_detection_pipe = Pipeline(
     [
-        # ===== IMPUTATION =====
-        # impute categorical variables with string missing
         (
-            "categorical_imputation",
-            CategoricalImputer(imputation_method="missing", variables=config.model_config.categorical_vars_with_na),
+            "count_vectorizer",
+            CountVectorizer(tokenizer = RegexpTokenizer(r'[A-Za-z]+').tokenize,stop_words='english'),
         ),
-        # add missing indicator to numerical variables
-        ("missing_indicator", AddMissingIndicator(variables=config.model_config.numerical_vars_with_na)),
-        # impute numerical variables with the median
         (
-            "median_imputation",
-            MeanMedianImputer(imputation_method="median", variables=config.model_config.numerical_vars_with_na),
-        ),
-        # Extract letter from cabin
-        ("extract_letter", ExtractLetterTransformer(variables=config.model_config.var_for_letter_extraction)),
-        # == CATEGORICAL ENCODING ======
-        # remove categories present in less than 5% of the observations (0.05)
-        # group them in one category called 'Rare'
-        (
-            "rare_label_encoder",
-            RareLabelEncoder(tol=0.05, n_categories=1, variables=config.model_config.categorical_vars),
-        ),
-        # encode categorical variables using one hot encoding into k-1 variables
-        ("categorical_encoder", OneHotEncoder(drop_last=True, variables=config.model_config.categorical_vars)),
-        # scale
-        ("scaler", StandardScaler()),
-        (
-            "Logit",
+            "logit",
             LogisticRegression(
                 C=config.model_config.alpha, solver="liblinear", random_state=config.model_config.random_state
-            ),
+            )
         ),
     ]
 )

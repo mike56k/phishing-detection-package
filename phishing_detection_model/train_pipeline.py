@@ -4,7 +4,6 @@ from pathlib import Path
 from config.core import LOG_DIR, config
 from pipeline import phishing_detection_pipe
 from processing.data_manager import load_dataset, save_pipeline
-from processing.validation import get_first_cabin, get_title
 from sklearn.metrics import accuracy_score, roc_auc_score
 from sklearn.model_selection import train_test_split
 
@@ -22,18 +21,9 @@ def run_training() -> None:
     # read training data
     data = load_dataset(file_name=config.app_config.training_data_file)
 
-    data["Cabin"] = data["Cabin"].apply(get_first_cabin)
-    data["Title"] = data["Name"].apply(get_title)
-
-    # cast numerical variables as floats
-    data["Fare"] = data["Fare"].astype("float")
-    data["Age"] = data["Age"].astype("float")
-
-    data.drop(labels=config.model_config.variables_to_drop, axis=1, inplace=True)
-
     # divide train and test
     X_train, X_test, y_train, y_test = train_test_split(
-        data[config.model_config.features],  # predictors
+        data[config.model_config.features], # predictors
         data[config.model_config.target],
         test_size=config.model_config.test_size,
         # we are setting the random seed here
