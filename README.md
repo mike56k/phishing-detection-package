@@ -15,8 +15,7 @@ and [Pydantic](https://pydantic-docs.helpmanual.io/) lib for type checking the v
 
 The pipeline is set in `phishing_detection_model/pipeline.py` file. Training is set in
 `phishing_detection_model/train_pipeline.py` file. All the data processing steps are made in the same
-[Scikit-learn](https://scikit-learn.org/stable/) style including custom transformations, stored in
-`phishing_detection_model/processing/features.py` file.
+[Scikit-learn](https://scikit-learn.org/stable/) style.
 
 ### Making predictions
 
@@ -55,13 +54,27 @@ After that you can make predictions, using the package:
 from phishing_detection_model.predict import make_prediction
 
 # Example input
-input_dict = {'PassengerId': [0], 'Pclass': [1], 'Name': ['Snyder, Mrs. John Pillsbury (Nelle Stevenson)'],
-              'Sex': ['female'], 'Age': [23], 'SibSp': [1], 'Parch': [0], 'Ticket': [21228], 'Fare': [82.2667],
-              'Cabin': ['B45'], 'Embarked': ['S']}
+input_dict = {'URL': ['https://google.com']}
 
 result = make_prediction(input_data=input_dict)
 
 print(result)
+```
+
+## How to publish package
+
+```
+python setup.py sdist bdist_wheel
+```
+
+Upload to test PyPi:
+```
+twine upload --repository testpypi dist/*
+```
+
+Upload to real PyPi:
+```
+twine upload --repository pypi dist/*
 ```
 
 ## Web application
