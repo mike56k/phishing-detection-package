@@ -34,12 +34,12 @@ class ModelConfig(BaseModel):
 
     target: str
     features: List[str]
-    variables_to_drop: Sequence[str]
-    categorical_vars: Sequence[str]
-    numerical_vars: Sequence[str]
-    categorical_vars_with_na: List[str]
-    numerical_vars_with_na: List[str]
-    var_for_letter_extraction: List[str]
+    # variables_to_drop: Sequence[str]
+    # categorical_vars: Sequence[str]
+    # numerical_vars: Sequence[str]
+    # categorical_vars_with_na: List[str]
+    # numerical_vars_with_na: List[str]
+    # var_for_letter_extraction: List[str]
     test_size: float
     random_state: int
     alpha: float

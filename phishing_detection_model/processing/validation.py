@@ -10,25 +10,25 @@ from phishing_detection_model.config.core import config
 
 # retain only the first cabin if more than
 # 1 are available per passenger
-def get_first_cabin(row):
-    try:
-        return row.split()[0]
-    except:
-        return np.nan
+# def get_first_cabin(row):
+#     try:
+#         return row.split()[0]
+#     except:
+#         return np.nan
 
 
-def get_title(passenger):
-    line = passenger
-    if re.search("Mrs", line):
-        return "Mrs"
-    elif re.search("Mr", line):
-        return "Mr"
-    elif re.search("Miss", line):
-        return "Miss"
-    elif re.search("Master", line):
-        return "Master"
-    else:
-        return "Other"
+# def get_title(passenger):
+#     line = passenger
+#     if re.search("Mrs", line):
+#         return "Mrs"
+#     elif re.search("Mr", line):
+#         return "Mr"
+#     elif re.search("Miss", line):
+#         return "Miss"
+#     elif re.search("Master", line):
+#         return "Master"
+#     else:
+#         return "Other"
 
 
 def drop_na_inputs(*, input_data: pd.DataFrame) -> pd.DataFrame:
@@ -47,13 +47,13 @@ def drop_na_inputs(*, input_data: pd.DataFrame) -> pd.DataFrame:
 
 def validate_inputs(*, input_data: pd.DataFrame) -> Tuple[pd.DataFrame, Optional[dict]]:
     """Check model inputs for unprocessable values."""
-    input_data["Cabin"] = input_data["Cabin"].apply(get_first_cabin)
-    input_data["Title"] = input_data["Name"].apply(get_title)
+    # input_data["Cabin"] = input_data["Cabin"].apply(get_first_cabin)
+    # input_data["Title"] = input_data["Name"].apply(get_title)
     # cast numerical variables as floats
-    input_data["Fare"] = input_data["Fare"].astype("float")
-    input_data["Age"] = input_data["Age"].astype("float")
+    # input_data["Fare"] = input_data["Fare"].astype("float")
+    # input_data["Age"] = input_data["Age"].astype("float")
 
-    input_data.drop(labels=config.model_config.variables_to_drop, axis=1, inplace=True)
+    # input_data.drop(labels=config.model_config.variables_to_drop, axis=1, inplace=True)
 
     # Columns should coinside with config.model_config.feature
     assert input_data.columns.tolist() == config.model_config.features
@@ -73,18 +73,7 @@ def validate_inputs(*, input_data: pd.DataFrame) -> Tuple[pd.DataFrame, Optional
 
 
 class PhishingDetectionInputSchema(BaseModel):
-    PassengerId: Optional[int]
-    Pclass: Optional[int]
-    Name: Optional[str]
-    Sex: Optional[str]
-    Age: Optional[float]
-    SibSp: Optional[int]
-    Parch: Optional[int]
-    Ticket: Optional[str]
-    Fare: Optional[float]
-    Cabin: Optional[str]
-    Embarked: Optional[str]
-
+    URL: Optional[str]
 
 class MultiplePhishingDetectionInputs(BaseModel):
     inputs: List[PhishingDetectionInputSchema]
