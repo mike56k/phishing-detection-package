@@ -1,0 +1,18 @@
+include *.txt
+include *.md
+include *.pkl
+recursive-include ./phishing_detection_model/*
+
+include phishing_detection_model/datasets/train.csv
+include phishing_detection_model/datasets/test.csv
+include phishing_detection_model/trained_models/*.pkl
+include phishing_detection_model/VERSION
+include phishing_detection_model/config.yml
+
+include ./requirements/requirements.txt
+include ./requirements/test_requirements.txt
+exclude *.log
+exclude *.cfg
+
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
