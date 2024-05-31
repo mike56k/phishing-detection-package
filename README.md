@@ -1,9 +1,5 @@
 # Phishing detection package
 
-## Motivation
-
-## Code structure
-
 ### Configs
 
 The model parameters are set via configs. The configs are represented by yaml files. The values
