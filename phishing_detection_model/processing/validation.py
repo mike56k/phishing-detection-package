@@ -6,6 +6,7 @@ from pydantic import BaseModel, ValidationError
 
 from phishing_detection_model.config.core import config
 
+
 def validate_inputs(*, input_data: pd.DataFrame) -> Tuple[pd.DataFrame, Optional[dict]]:
     """Check model inputs for unprocessable values."""
 

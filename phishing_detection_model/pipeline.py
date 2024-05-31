@@ -1,6 +1,7 @@
 from nltk.tokenize import RegexpTokenizer  # regexp tokenizers use to split words from text
-from sklearn.feature_extraction.text import CountVectorizer  # create sparse matrix of words using regexptokenizes
-
+from sklearn.feature_extraction.text import (
+    CountVectorizer,  # create sparse matrix of words using regexptokenizes
+)
 from sklearn.linear_model import LogisticRegression
 
 # pipeline
@@ -13,13 +14,15 @@ phishing_detection_pipe = Pipeline(
     [
         (
             "count_vectorizer",
-            CountVectorizer(tokenizer=RegexpTokenizer(r'[A-Za-z]+').tokenize, stop_words='english', token_pattern=None),
+            CountVectorizer(
+                tokenizer=RegexpTokenizer(r"[A-Za-z]+").tokenize, stop_words="english", token_pattern=None
+            ),
         ),
         (
             "logit",
             LogisticRegression(
                 C=config.model_config.alpha, solver="liblinear", random_state=config.model_config.random_state
-            )
+            ),
         ),
     ]
 )
